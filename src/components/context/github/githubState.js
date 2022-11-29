@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useReducer } from "react";
-import { SEARCH_USERS } from "../types";
+import { CLEAR_USERS, GET_USER, SEARCH_USERS } from "../types";
 import GitHubContext from "./githubContext";
 import GithubReducer from "./githubReducer";
 
@@ -22,12 +22,29 @@ const GithubState = (props) => {
     });
   };
 
+  const clearUsers = () => {
+    dispatch({
+      type: CLEAR_USERS,
+    });
+  };
+
+  const getUser = async (loginId) => {
+    const response = await axios.get(`https://api.github.com/users/${loginId}`);
+    dispatch({
+      type: GET_USER,
+      payload: response.data,
+    });
+  };
+
   return (
+    // com này truyền cho con nếu con mún nhận
     <GitHubContext.Provider
       value={{
         usersData: state.usersData,
         user: state.user,
         searchUsers,
+        clearUsers,
+        getUser,
       }}
     >
       {props.children}

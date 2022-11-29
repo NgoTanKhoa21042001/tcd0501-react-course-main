@@ -9,9 +9,16 @@ export default (state, action) => {
         usersData: action.payload,
       };
     case CLEAR_USERS:
-      return {};
+      return {
+        ...state,
+        usersData: [],
+        user: {},
+      };
     case GET_USER:
-      return {};
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       return state;
   }

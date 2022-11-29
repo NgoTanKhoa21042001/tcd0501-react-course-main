@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import GitHubContext from "../context/github/githubContext";
 const Search = (props) => {
+  // nhận context trong com GithubContext
   const githubContext = useContext(GitHubContext);
   const { searchUsers } = githubContext;
   const [text, setText] = useState("");

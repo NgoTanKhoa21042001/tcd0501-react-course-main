@@ -12,26 +12,6 @@ import User from "./components/users/User";
 import Users from "./components/users/Users";
 
 const App = () => {
-  const [usersData, setUsersData] = useState([]);
-  const [user, setUser] = useState({});
-
-  // const searchUsers = async (text) => {
-  //   const response = await axios.get(
-  //     `https://api.github.com/search/users?q=${text}`
-  //   );
-  //   setUsersData(response.data.items);
-  // };
-
-  const clearUsers = () => {
-    setUsersData([]);
-    setUser({});
-  };
-
-  const getUser = async (loginId) => {
-    const response = await axios.get(`https://api.github.com/users/${loginId}`);
-    setUser(response.data);
-  };
-
   return (
     <GithubState>
       <Router>
@@ -41,7 +21,7 @@ const App = () => {
             <Switch>
               <Route exact path="/">
                 <Fragment>
-                  <Search clearUsers={clearUsers} />
+                  <Search />
                   <Users />
                 </Fragment>
               </Route>
@@ -49,7 +29,7 @@ const App = () => {
                 <About />
               </Route>
               <Route exact path="/user/:loginId">
-                <User user={user} getUser={getUser} />
+                <User />
               </Route>
               <Route path="*">
                 <NotFound />
